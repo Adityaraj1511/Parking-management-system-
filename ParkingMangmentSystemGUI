@@ -1,0 +1,121 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class ParkingManagementSystemGUI {
+    private JFrame frame;
+    private JPanel loginPanel;
+    private JPanel parkingPanel;
+    private JPanel driverPanel;
+    private JTextField usernameField;
+    private JPasswordField passwordField;
+    private JTextField carNumberField;
+    private JTextField carDetailsField;
+    private JTextField driverNameField;
+    private JTextField driverPhoneField;
+    private JTextField driverAddressField;
+    private JTextField driverEmailField;
+
+    public ParkingManagementSystemGUI() {
+        // create the main frame
+        frame = new JFrame("Parking Management System");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // create the login panel
+        loginPanel = new JPanel(new GridLayout(0, 2));
+        JLabel usernameLabel = new JLabel("Username:");
+        JLabel passwordLabel = new JLabel("Password:");
+        usernameField = new JTextField(20);
+        passwordField = new JPasswordField(20);
+        JButton loginButton = new JButton("Login");
+        loginButton.addActionListener(new LoginButtonListener());
+        loginPanel.add(usernameLabel);
+        loginPanel.add(usernameField);
+        loginPanel.add(passwordLabel);
+        loginPanel.add(passwordField);
+        loginPanel.add(new JLabel(""));
+        loginPanel.add(loginButton);
+
+        // create the parking panel
+        parkingPanel = new JPanel(new GridLayout(0, 2));
+        JLabel carNumberLabel = new JLabel("Car Number:");
+        JLabel carDetailsLabel = new JLabel("Car Details:");
+        carNumberField = new JTextField(20);
+        carDetailsField = new JTextField(20);
+        JButton saveButton = new JButton("Save");
+        saveButton.addActionListener(new SaveButtonListener());
+        parkingPanel.add(carNumberLabel);
+        parkingPanel.add(carNumberField);
+        parkingPanel.add(carDetailsLabel);
+        parkingPanel.add(carDetailsField);
+        parkingPanel.add(new JLabel(""));
+        parkingPanel.add(saveButton);
+
+        // create the driver panel
+        driverPanel = new JPanel(new GridLayout(0, 2));
+        JLabel driverNameLabel = new JLabel("Driver Name:");
+        JLabel driverPhoneLabel = new JLabel("Driver Phone Number:");
+        JLabel driverAddressLabel = new JLabel("Driver Address:");
+        JLabel driverEmailLabel = new JLabel("Driver Email:");
+        driverNameField = new JTextField(20);
+        driverPhoneField = new JTextField(20);
+        driverAddressField = new JTextField(20);
+        driverEmailField = new JTextField(20);
+        JButton driverSaveButton = new JButton("Save");
+        driverSaveButton.addActionListener(new DriverSaveButtonListener());
+        driverPanel.add(driverNameLabel);
+        driverPanel.add(driverNameField);
+        driverPanel.add(driverPhoneLabel);
+        driverPanel.add(driverPhoneField);
+        driverPanel.add(driverAddressLabel);
+        driverPanel.add(driverAddressField);
+        driverPanel.add(driverEmailLabel);
+        driverPanel.add(driverEmailField);
+        driverPanel.add(new JLabel(""));
+        driverPanel.add(driverSaveButton);
+
+        // add the login panel to the frame
+        frame.getContentPane().add(loginPanel);
+
+        // set the size and show the frame
+        frame.setPreferredSize(new Dimension(400, 150));
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    private class LoginButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String username = usernameField.getText();
+            String password = new String(passwordField.getPassword());
+            if (username.equals("admin") && password.equals("password")) {
+                frame.getContentPane().removeAll();
+                frame.getContentPane().add(parkingPanel);
+                frame.pack();
+            } else {
+                JOptionPane.showMessageDialog(frame, "Invalid username or password.");
+}
+}
+}
+private class SaveButtonListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+        String carNumber = carNumberField.getText();
+        String carDetails = carDetailsField.getText();
+        JOptionPane.showMessageDialog(frame, "Car Number: " + carNumber + "\nCar Details: " + carDetails);
+    }
+}
+
+private class DriverSaveButtonListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+        String driverName = driverNameField.getText();
+        String driverPhone = driverPhoneField.getText();
+        String driverAddress = driverAddressField.getText();
+        String driverEmail = driverEmailField.getText();
+        JOptionPane.showMessageDialog(frame, "Driver Name: " + driverName + "\nDriver Phone Number: " + driverPhone
+                + "\nDriver Address: " + driverAddress + "\nDriver Email: " + driverEmail);
+    }
+}
+
+public static void main(String[] args) {
+    new ParkingManagementSystemGUI();
+}
+}
